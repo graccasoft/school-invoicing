@@ -22,4 +22,9 @@ public class Student extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "school_class_id")
     private SchoolClass schoolClass;
+
+    @Override
+    public String toString() {
+        return  firstName + ' ' +lastName ;
+    }
 }
