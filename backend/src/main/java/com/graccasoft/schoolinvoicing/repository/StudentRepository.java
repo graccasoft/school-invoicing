@@ -10,6 +10,6 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findAllBySchoolClass(SchoolClass schoolClass, Pageable pageable);
-    List<Student> findAllByLastNameContaining(String lastName, Pageable pageable);
+    List<Student> findAllByLastNameContainingIgnoreCase(String lastName, Pageable pageable);
     List<Student> findAllByFirstNameAndLastName(String firstName, String lastName);
 }

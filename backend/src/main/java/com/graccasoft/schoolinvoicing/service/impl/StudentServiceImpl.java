@@ -33,7 +33,7 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public StudentDto saveStudent(StudentDto studentDto) {
         Student student = new Student();
-        if(studentDto.getId() != 0)
+        if(studentDto.getId() != null && studentDto.getId() != 0)
             student = studentRepository.getReferenceById(student.getId());
 
         SchoolClass schoolClass = schoolClassRepository.findById(studentDto.getSchoolClassId())
@@ -63,7 +63,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<StudentDto> findStudentsByName(String lastName) {
         //todo use dynamic pagination
-        return studentRepository.findAllByLastNameContaining(lastName, PageRequest.of(0,20))
+        return studentRepository.findAllByLastNameContainingIgnoreCase(lastName, PageRequest.of(0,20))
                 .stream()
                 .map(studentDtoMapper)
                 .toList();
