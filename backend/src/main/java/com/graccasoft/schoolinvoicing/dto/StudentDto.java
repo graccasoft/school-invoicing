@@ -19,5 +19,5 @@ public class StudentDto {
     private String parentPhoneNumber;
     private String parentAddress;
     private String schoolClassName;
-    private String schoolClassId;
+    private Long schoolClassId;
 }

@@ -6,7 +6,7 @@ import com.graccasoft.schoolinvoicing.model.Student;
 import java.util.List;
 
 public interface StudentService {
-    Student saveStudent(StudentDto studentDto);
+    StudentDto saveStudent(StudentDto studentDto);
     List<StudentDto> findStudentsInClass(Integer schoolClassId);
     List<StudentDto> findStudentsByName(String lastName);
     StudentDto getStudent(Integer studentId);
