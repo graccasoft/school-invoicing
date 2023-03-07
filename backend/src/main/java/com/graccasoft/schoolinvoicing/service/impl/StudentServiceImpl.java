@@ -8,6 +8,8 @@ import com.graccasoft.schoolinvoicing.model.Student;
 import com.graccasoft.schoolinvoicing.repository.SchoolClassRepository;
 import com.graccasoft.schoolinvoicing.repository.StudentRepository;
 import com.graccasoft.schoolinvoicing.service.StudentService;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,17 +50,29 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentDto> findStudentsInClass(Integer schoolClassId) {
-        return null;
+    public List<StudentDto> findStudentsInClass(Long schoolClassId) {
+        SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId)
+                .orElseThrow(()-> new BadRequestException("Invalid school class"));
+        //todo provide pages
+        return  studentRepository.findAllBySchoolClass(schoolClass, PageRequest.of(0,20))
+                .stream()
+                .map(studentDtoMapper)
+                .toList();
     }
 
     @Override
     public List<StudentDto> findStudentsByName(String lastName) {
-        return null;
+        //todo use dynamic pagination
+        return studentRepository.findAllByLastNameContaining(lastName, PageRequest.of(0,20))
+                .stream()
+                .map(studentDtoMapper)
+                .toList();
     }
 
     @Override
-    public StudentDto getStudent(Integer studentId) {
-        return null;
+    public StudentDto getStudent(Long studentId) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new EntityNotFoundException("Student not found"));
+        return studentDtoMapper.apply(student);
     }
 }

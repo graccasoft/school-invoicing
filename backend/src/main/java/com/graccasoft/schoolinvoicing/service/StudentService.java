@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface StudentService {
     StudentDto saveStudent(StudentDto studentDto);
-    List<StudentDto> findStudentsInClass(Integer schoolClassId);
+    List<StudentDto> findStudentsInClass(Long schoolClassId);
     List<StudentDto> findStudentsByName(String lastName);
-    StudentDto getStudent(Integer studentId);
+    StudentDto getStudent(Long studentId);
 }
