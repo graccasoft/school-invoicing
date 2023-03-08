@@ -21,6 +21,6 @@ public class Invoice extends BaseEntity  {
     @JoinColumn(name ="user_id")
     private User user;
 
-    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<InvoiceItem> items;
 }

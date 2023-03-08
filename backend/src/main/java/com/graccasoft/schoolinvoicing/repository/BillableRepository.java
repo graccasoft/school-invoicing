@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface BillableRepository extends JpaRepository<Billable, Long> {
 
-    @Query(value = "SELECT b FROM Billable b WHERE b.schoolClass.id = ?schoolClassId")
-    List<Billable> getAllBySchoolClass(Long schoolClassId);
+    List<Billable> getAllBySchoolClassId(Long schoolClassId);
 }

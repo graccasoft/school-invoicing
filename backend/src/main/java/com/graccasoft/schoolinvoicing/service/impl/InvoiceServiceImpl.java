@@ -62,7 +62,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public void generateInvoiceForSchoolClass(Long schoolClassId) {
         //get billableItems
-        List<Billable> billableItems = billableRepository.getAllBySchoolClass(schoolClassId);
+        List<Billable> billableItems = billableRepository.getAllBySchoolClassId(schoolClassId);
         if( billableItems.size() == 0 ){
             return; //might want to throw an exception
         }
@@ -78,7 +78,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     public void generateInvoiceForStudent(Long studentId) {
         Student student = studentRepository.findById(studentId).orElseThrow(()->new EntityNotFoundException("Student not found"));
         //get billableItems
-        List<Billable> billableItems = billableRepository.getAllBySchoolClass(student.getSchoolClass().getId());
+        List<Billable> billableItems = billableRepository.getAllBySchoolClassId(student.getSchoolClass().getId());
         if( billableItems.size() == 0 ){
             return; //might want to throw an exception
         }

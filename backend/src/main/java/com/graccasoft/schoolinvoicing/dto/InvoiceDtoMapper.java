@@ -3,7 +3,9 @@ package com.graccasoft.schoolinvoicing.dto;
 import java.util.function.Function;
 import com.graccasoft.schoolinvoicing.model.Invoice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class InvoiceDtoMapper implements Function<Invoice, InvoiceDto> {
 
     @Autowired
