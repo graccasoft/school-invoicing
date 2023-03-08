@@ -3,10 +3,12 @@ package com.graccasoft.schoolinvoicing.service.impl;
 import com.graccasoft.schoolinvoicing.model.SchoolClass;
 import com.graccasoft.schoolinvoicing.repository.SchoolClassRepository;
 import com.graccasoft.schoolinvoicing.service.SchoolClassService;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class SchoolClassServiceImpl implements SchoolClassService {
 
     private final SchoolClassRepository schoolClassRepository;
