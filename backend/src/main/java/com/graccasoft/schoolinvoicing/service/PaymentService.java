@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface PaymentService {
     Payment savePayment(PaymentDto paymentDto);
-    List<PaymentDto> getStudentPayments(Long paymentId);
+    List<PaymentDto> getStudentPayments(Long studentId);
+
+    //todo add pagination
+    List<PaymentDto> getAllPayments();
 }

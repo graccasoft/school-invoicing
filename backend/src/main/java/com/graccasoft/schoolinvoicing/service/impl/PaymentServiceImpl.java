@@ -43,4 +43,12 @@ public class PaymentServiceImpl implements PaymentService {
                 .map(paymentDtoMapper)
                 .toList();
     }
+
+    @Override
+    public List<PaymentDto> getAllPayments() {
+        return paymentRepository.findAll()
+                .stream()
+                .map(paymentDtoMapper)
+                .toList();
+    }
 }

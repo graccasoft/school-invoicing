@@ -1,6 +1,10 @@
 package com.graccasoft.schoolinvoicing.controller;
 
+import com.graccasoft.schoolinvoicing.dto.InvoiceDto;
+import com.graccasoft.schoolinvoicing.dto.PaymentDto;
 import com.graccasoft.schoolinvoicing.dto.StudentDto;
+import com.graccasoft.schoolinvoicing.service.InvoiceService;
+import com.graccasoft.schoolinvoicing.service.PaymentService;
 import com.graccasoft.schoolinvoicing.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +16,13 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
     private final StudentService studentService;
+    private final InvoiceService invoiceService;
+    private final PaymentService paymentService;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, InvoiceService invoiceService, PaymentService paymentService) {
         this.studentService = studentService;
+        this.invoiceService = invoiceService;
+        this.paymentService = paymentService;
     }
 
     @PostMapping
@@ -37,5 +45,17 @@ public class StudentController {
     public List<StudentDto> searchStudents(@PathVariable String query){
         return studentService.findStudentsByName(query);
     }
+
+    @GetMapping("{studentId}/invoices")
+    public List<InvoiceDto> getStudentInvoices(@PathVariable Long studentId){
+        return invoiceService.getStudentInvoices(studentId);
+    }
+
+    @GetMapping("{studentId}/payments")
+    public List<PaymentDto> getStudentPayments(@PathVariable Long studentId){
+        return paymentService.getStudentPayments(studentId);
+    }
+
+
 
 }
