@@ -38,6 +38,11 @@ public class SchoolClassController {
         return schoolClassService.getSchoolClasses();
     }
 
+    @GetMapping("{schoolClassId}")
+    public SchoolClass getSchoolClass(@PathVariable Long schoolClassId){
+        return schoolClassService.getSchoolClass(schoolClassId);
+    }
+
     @GetMapping("{schoolClassId}/invoices")
     public List<InvoiceDto> getInvoices(@PathVariable Long schoolClassId){
         return invoiceService.getSchoolClassInvoices(schoolClassId);

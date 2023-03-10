@@ -8,7 +8,7 @@ export class Student{
     parentPhoneNumber!: string
     parentAddress!: string
     schoolClassName!: string
-    schoolClassId!: string
+    schoolClassId!: number
     
     
 }

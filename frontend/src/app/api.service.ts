@@ -20,6 +20,10 @@ export class ApiService {
     return this.http.get<SchoolClass[]>(this.apiEndPoint + '/school-class')
   }
 
+  fetchSchoolClass(schoolClassId:number):Observable<SchoolClass>{
+    return this.http.get<SchoolClass>(this.apiEndPoint + '/school-class/' + schoolClassId)
+  }
+
   fetchStudentsInClass(schoolClassId: number):Observable<Student[]>{
     return this.http.get<Student[]>(this.apiEndPoint + '/school-class/' + schoolClassId + '/students')
   }
@@ -34,6 +38,10 @@ export class ApiService {
 
   fetchStudent(studentId: number):Observable<Student>{
     return this.http.get<Student>(this.apiEndPoint + '/students/' + studentId )
+  }
+
+  saveStudent(student:Student):Observable<Student>{
+    return this.http.post<Student>(this.apiEndPoint + "/students", student)
   }
 
   fetchStudentInvoices(studentId: number):Observable<Invoice[]>{

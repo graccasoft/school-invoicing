@@ -3,6 +3,7 @@ package com.graccasoft.schoolinvoicing.service.impl;
 import com.graccasoft.schoolinvoicing.model.SchoolClass;
 import com.graccasoft.schoolinvoicing.repository.SchoolClassRepository;
 import com.graccasoft.schoolinvoicing.service.SchoolClassService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,5 +28,11 @@ public class SchoolClassServiceImpl implements SchoolClassService {
     @Override
     public List<SchoolClass> getSchoolClasses() {
         return schoolClassRepository.findAll();
+    }
+
+    @Override
+    public SchoolClass getSchoolClass(Long schoolClassId) {
+        return schoolClassRepository.findById(schoolClassId)
+                .orElseThrow(()->new EntityNotFoundException("School class not found"));
     }
 }

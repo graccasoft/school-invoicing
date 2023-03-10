@@ -34,7 +34,7 @@ public class StudentServiceImpl implements StudentService {
     public StudentDto saveStudent(StudentDto studentDto) {
         Student student = new Student();
         if(studentDto.getId() != null && studentDto.getId() != 0)
-            student = studentRepository.getReferenceById(student.getId());
+            student = studentRepository.getReferenceById(studentDto.getId());
 
         SchoolClass schoolClass = schoolClassRepository.findById(studentDto.getSchoolClassId())
                 .orElseThrow(() ->new BadRequestException("Invalid class provided"));
@@ -43,6 +43,7 @@ public class StudentServiceImpl implements StudentService {
         student.setFirstName(studentDto.getFirstName());
         student.setLastName(studentDto.getLastName());
         student.setParentName(studentDto.getParentName());
+        student.setParentPhoneNumber(studentDto.getParentPhoneNumber());
         student.setParentAddress(student.getParentAddress());
         student.setSchoolClass(  schoolClass   );
 
