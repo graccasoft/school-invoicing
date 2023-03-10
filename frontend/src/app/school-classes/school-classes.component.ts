@@ -51,4 +51,14 @@ export class SchoolClassesComponent {
       })
     }
   }
+
+  runInvoices(schoolClassId:number){
+    this.selectSchoolClass(schoolClassId)
+
+    if( confirm('Are you sure you want to generate invoices for '+ this.schoolClass.description)){
+      this.apiService.generateSchoolClassInvoices(this.schoolClass.id).subscribe(response=>{
+        this.toastr.success( response.message ,'Invoicing System');
+      })
+    }
+  }
 }

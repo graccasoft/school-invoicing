@@ -44,7 +44,7 @@ public class StudentServiceImpl implements StudentService {
         student.setLastName(studentDto.getLastName());
         student.setParentName(studentDto.getParentName());
         student.setParentPhoneNumber(studentDto.getParentPhoneNumber());
-        student.setParentAddress(student.getParentAddress());
+        student.setParentAddress(studentDto.getParentAddress());
         student.setSchoolClass(  schoolClass   );
 
         return studentDtoMapper.apply( studentRepository.save(student) );

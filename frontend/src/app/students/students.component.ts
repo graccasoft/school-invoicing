@@ -4,6 +4,7 @@ import { SchoolClass } from '../model/school-class';
 import { Student } from '../model/student';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Payment } from '../model/payment';
 
 @Component({
   selector: 'app-students',
@@ -15,6 +16,7 @@ export class StudentsComponent {
   schoolClass!: SchoolClass
   students!: Student[]
   student: Student = new Student()
+  payment: Payment = new Payment()
 
   constructor(
     private apiService: ApiService,
@@ -56,6 +58,18 @@ export class StudentsComponent {
 
         document.getElementById("close-school-form-modal")?.click();
         this.toastr.success('Student has been successfully saved','Invoicing System');
+        this.addNewStudent()
+    })
+  }
+
+  savePayment(){
+    this.payment.id = 0
+    this.payment.studentId = this.student.id
+    this.apiService.savePayment (this.payment).subscribe(payment=>{
+        this.payment = new Payment()
+
+        document.getElementById("close-payment-form-modal")?.click();
+        this.toastr.success('Payment has been successfully saved','Invoicing System');
         this.addNewStudent()
     })
   }

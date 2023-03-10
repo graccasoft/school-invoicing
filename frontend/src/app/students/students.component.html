@@ -95,8 +95,10 @@
                             <a href="#" class="btn btn-sm btn-secondary me-4">
                                 View Statement
                             </a>
-                            <a href="#" class="btn btn-sm btn-secondary">
-                                Run Invoice
+                            <a href="#" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                            (click)="selectStudent(student.id)"
+                            data-bs-target="#payment-form-modal">
+                                Payment
                             </a>
                         </td>
                     </tr>
@@ -179,6 +181,52 @@
                 <button type="button" id="close-school-form-modal" class="btn btn-light"
                     data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" (click)="saveStudent()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="payment-form-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Record Payment</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <span class="svg-icon svg-icon-1"></span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+
+                <form class="space-y-6" #categoryForm="ngForm">
+                    <div class="mb-10 row">
+                        <div class="col-md-12">
+                            <label for="category_name" class="form-label">Amount</label>
+                            <input type="text" [(ngModel)]="payment.amount" name="unitPrice" #name="ngModel"
+                                class="form-control" placeholder="Price" required minlength="4">  
+                        </div>
+                                 
+                    </div>
+                    <div class="mb-10 row">
+                        <div class="col-md-12">
+                            <label for="category_name" class="form-label">Notes</label>
+                            <input type="text" class="form-control" placeholder="Description" required minlength="4">          
+                        </div>
+                                  
+                    </div>
+                    
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="close-payment-form-modal" class="btn btn-light"
+                    data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="savePayment()">Save changes</button>
             </div>
         </div>
     </div>
