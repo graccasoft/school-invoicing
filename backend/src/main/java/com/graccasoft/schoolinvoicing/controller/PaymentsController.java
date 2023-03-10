@@ -5,11 +5,13 @@ import com.graccasoft.schoolinvoicing.model.Payment;
 import com.graccasoft.schoolinvoicing.service.PaymentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController()
+@RequestMapping("payments")
 public class PaymentsController {
 
     private final PaymentService paymentService;

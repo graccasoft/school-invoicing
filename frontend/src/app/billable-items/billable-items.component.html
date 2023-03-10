@@ -6,20 +6,34 @@
             data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
             class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
             <!--begin::Title-->
-            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">School Classes</h1>
+            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Invoice Items</h1>
             <!--end::Title-->
             <!--begin::Separator-->
             <span class="h-20px border-gray-200 border-start mx-4"></span>
             <!--end::Separator-->
+
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb fw-bold fs-7 my-1" *ngIf="schoolClass">
+                <li class="breadcrumb-item" >
+                    <a href="s" class="">{{schoolClass.description}}</a>
+                </li>
+                <li class="breadcrumb-item" >
+                    <a href="#" class="">Invoice Items</a>
+                </li>
+            </ul>
+            <!--end::Breadcrumb-->
 
         </div>
         <!--end::Page title-->
         <!--begin::Actions-->
         <div class="d-flex align-items-center py-1">
 
-            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#class-form-modal">
-                Add new Class
+            <button class="btn btn-primary" type="button" 
+                    (click)="addNewItem()"
+                    data-bs-toggle="modal" data-bs-target="#billable-form-modal">
+                Add new Item
             </button>
+            
 
         </div>
         <!--end::Actions-->
@@ -41,36 +55,37 @@
                             ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Name
+                            Description
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Amount
+                        </th>
+                        
                         <th scope="col" class="px-6 py-3">
                             Action
                         </th>
                     </tr>
                 </thead>
                 <tbody class="fw-bold text-gray-600">
-                    <tr *ngFor="let schoolClass of schoolClasses">
+                    <tr *ngFor="let billable of billableItems">
                         <th scope="row">
-                            {{ schoolClass.id }}
+                            {{ billable.id }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ schoolClass.description }}
+                            {{ billable.description }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ billable.unitPrice }}
                         </td>
 
                         <td class="px-6 py-4">
                             <a href="#" class="btn btn-sm btn-primary me-4" data-bs-toggle="modal"
-                                (click)="selectSchoolClass(schoolClass.id)"
-                                data-bs-target="#class-form-modal">
+                                (click)="selectItem(billable.id)"
+                                data-bs-target="#billable-form-modal">
                                 Edit
                             </a>
-                            <a [routerLink]="['/students',schoolClass.id]" class="btn btn-sm btn-secondary me-4">
-                                View Students
-                            </a>
-                            <a [routerLink]="['/billable-items',schoolClass.id]" class="btn btn-sm btn-secondary me-4">
-                                Invoice Items
-                            </a>
-                            <a href="#" class="btn btn-sm btn-secondary">
-                                Run Invoices
+                            <a href="#" class="btn btn-sm btn-secondary me-4">
+                                Disable
                             </a>
                         </td>
                     </tr>
@@ -81,11 +96,11 @@
     </div>
 </div>
 
-<div class="modal fade" tabindex="-1" id="class-form-modal">
+<div class="modal fade" tabindex="-1" id="billable-form-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Add New Class</h3>
+                <h3 class="modal-title">Add New Invoice Item</h3>
 
                 <!--begin::Close-->
                 <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
@@ -99,33 +114,31 @@
 
 
                 <form class="space-y-6" #categoryForm="ngForm">
-                    <div class="mb-10">
-                        <label for="category_name" class="form-label">Class Name</label>
-                        <input type="text" [(ngModel)]="schoolClass.description" name="description" #name="ngModel"
-                            class="form-control" placeholder="Category Name" required minlength="4"
-                            (change)="toggleFormValidation(true)">
-                        <div *ngIf="!formIsValid" class="text-danger">
-
-                            <div *ngIf="name.errors?.['required']">
-                                Class Name is required.
-                            </div>
-                            <div *ngIf="name.errors?.['minlength']">
-                                Class Name must be at least 4 characters long.
-                            </div>
-
+                    <div class="mb-10 row">
+                        <div class="col-md-12">
+                            <label for="category_name" class="form-label">Description</label>
+                            <input type="text" [(ngModel)]="billable.description" name="description" #name="ngModel"
+                                class="form-control" placeholder="Description" required minlength="4">          
                         </div>
+                                  
                     </div>
-
-
-
+                    <div class="mb-10 row">
+                        <div class="col-md-12">
+                            <label for="category_name" class="form-label">Price</label>
+                            <input type="text" [(ngModel)]="billable.unitPrice" name="unitPrice" #name="ngModel"
+                                class="form-control" placeholder="Price" required minlength="4">          
+                        </div>
+                                 
+                    </div>
+                    
                 </form>
 
             </div>
 
             <div class="modal-footer">
-                <button type="button" id="close-school-form-modal" class="btn btn-light"
+                <button type="button" id="close-billable-form-modal" class="btn btn-light"
                     data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="saveSchoolClass()">Save changes</button>
+                <button type="button" class="btn btn-primary" (click)="saveItem()">Save changes</button>
             </div>
         </div>
     </div>

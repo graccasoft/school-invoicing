@@ -8,13 +8,15 @@ import { SchoolClassesComponent } from './school-classes/school-classes.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StudentsComponent } from './students/students.component'
+import { StudentsComponent } from './students/students.component';
+import { BillableItemsComponent } from './billable-items/billable-items.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     SchoolClassesComponent,
-    StudentsComponent
+    StudentsComponent,
+    BillableItemsComponent
   ],
   imports: [
     BrowserModule,

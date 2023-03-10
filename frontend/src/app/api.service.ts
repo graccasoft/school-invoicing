@@ -28,6 +28,10 @@ export class ApiService {
     return this.http.get<Student[]>(this.apiEndPoint + '/school-class/' + schoolClassId + '/students')
   }
 
+  fetchSchoolClassBillableItems(schoolClassId:number):Observable<Billable[]>{
+    return this.http.get<Billable[]>(this.apiEndPoint + '/school-class/' + schoolClassId + '/billable-items')
+  }
+
   saveSchoolClass(schoolClass: SchoolClass):Observable<SchoolClass>{
     return this.http.post<SchoolClass>(this.apiEndPoint + '/school-class', schoolClass)
   }
