@@ -3,6 +3,7 @@ package com.graccasoft.schoolinvoicing.controller;
 import com.graccasoft.schoolinvoicing.dto.InvoiceDto;
 import com.graccasoft.schoolinvoicing.dto.PaymentDto;
 import com.graccasoft.schoolinvoicing.dto.StudentDto;
+import com.graccasoft.schoolinvoicing.dto.StudentStatementDto;
 import com.graccasoft.schoolinvoicing.service.InvoiceService;
 import com.graccasoft.schoolinvoicing.service.PaymentService;
 import com.graccasoft.schoolinvoicing.service.StudentService;
@@ -54,6 +55,11 @@ public class StudentController {
     @GetMapping("{studentId}/payments")
     public List<PaymentDto> getStudentPayments(@PathVariable Long studentId){
         return paymentService.getStudentPayments(studentId);
+    }
+
+    @GetMapping("{studentId}/statement")
+    public StudentStatementDto getStudentStatement(@PathVariable Long studentId){
+        return studentService.getStudentStatement(studentId);
     }
 
 

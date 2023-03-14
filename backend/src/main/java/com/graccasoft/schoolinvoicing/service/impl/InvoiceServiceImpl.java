@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -94,9 +95,10 @@ public class InvoiceServiceImpl implements InvoiceService {
             Invoice invoice = new Invoice();
             invoice.setStudent(student);
 
+            BigDecimal invoiceTotal = BigDecimal.ZERO;
             //invoice items
             List<InvoiceItem> invoiceItems = new ArrayList<>();
-            billableItems.forEach((billable)->{
+            for(Billable billable: billableItems){
                 InvoiceItem invoiceItem = new InvoiceItem();
                 invoiceItem.setInvoice(invoice);
                 invoiceItem.setBillable(billable);
@@ -104,8 +106,10 @@ public class InvoiceServiceImpl implements InvoiceService {
                 invoiceItem.setUnitPrice(billable.getUnitPrice());
 
                 invoiceItems.add( invoiceItem );
-            });
+                invoiceTotal = invoiceTotal.add(billable.getUnitPrice());
+            }
 
+            invoice.setTotalAmount(invoiceTotal);
             invoice.setItems(invoiceItems);
 
             //persist invoice

@@ -3,13 +3,12 @@ package com.graccasoft.schoolinvoicing.controller;
 import com.graccasoft.schoolinvoicing.dto.PaymentDto;
 import com.graccasoft.schoolinvoicing.model.Payment;
 import com.graccasoft.schoolinvoicing.service.PaymentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController()
+@RequestMapping("payments")
 public class PaymentsController {
 
     private final PaymentService paymentService;
@@ -19,7 +18,7 @@ public class PaymentsController {
     }
 
     @PostMapping
-    public Payment savePayment(PaymentDto paymentDto){
+    public Payment savePayment(@RequestBody PaymentDto paymentDto){
         return paymentService.savePayment(paymentDto);
     }
 

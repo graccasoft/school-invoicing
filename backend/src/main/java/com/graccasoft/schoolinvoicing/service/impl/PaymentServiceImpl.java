@@ -7,8 +7,10 @@ import com.graccasoft.schoolinvoicing.model.Student;
 import com.graccasoft.schoolinvoicing.repository.PaymentRepository;
 import com.graccasoft.schoolinvoicing.repository.StudentRepository;
 import com.graccasoft.schoolinvoicing.service.PaymentService;
+import com.graccasoft.schoolinvoicing.service.SmsService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,14 +20,17 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final StudentRepository studentRepository;
     private final PaymentDtoMapper paymentDtoMapper;
+    private final SmsService smsService;
 
-    public PaymentServiceImpl(PaymentRepository paymentRepository, StudentRepository studentRepository, PaymentDtoMapper paymentDtoMapper) {
+    public PaymentServiceImpl(PaymentRepository paymentRepository, StudentRepository studentRepository, PaymentDtoMapper paymentDtoMapper, SmsService smsService) {
         this.paymentRepository = paymentRepository;
         this.studentRepository = studentRepository;
         this.paymentDtoMapper = paymentDtoMapper;
+        this.smsService = smsService;
     }
 
     @Override
+    @Transactional
     public Payment savePayment(PaymentDto paymentDto) {
         Student student = studentRepository.findById(paymentDto.getStudentId())
                 .orElseThrow(() -> new EntityNotFoundException("Student with ID not found"));
@@ -33,7 +38,10 @@ public class PaymentServiceImpl implements PaymentService {
         payment.setStudent( student );
         payment.setAmount(paymentDto.getAmount());
 
-        return paymentRepository.save(payment);
+        Payment savedPayment =  paymentRepository.save(payment);
+
+        this.smsService.sendPaymentSms(savedPayment);
+        return savedPayment;
     }
 
     @Override

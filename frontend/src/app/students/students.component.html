@@ -1,0 +1,256 @@
+<div class="toolbar" id="kt_toolbar">
+    <!--begin::Container-->
+    <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+        <!--begin::Page title-->
+        <div data-kt-swapper="true" data-kt-swapper-mode="prepend"
+            data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
+            class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+            <!--begin::Title-->
+            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Students</h1>
+            <!--end::Title-->
+            <!--begin::Separator-->
+            <span class="h-20px border-gray-200 border-start mx-4"></span>
+            <!--end::Separator-->
+
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb fw-bold fs-7 my-1" *ngIf="schoolClass">
+                <li class="breadcrumb-item" >
+                    <a href="s" class="">{{schoolClass.description}}</a>
+                </li>
+                <li class="breadcrumb-item" >
+                    <a href="#" class="">Students</a>
+                </li>
+            </ul>
+            <!--end::Breadcrumb-->
+
+        </div>
+        <!--end::Page title-->
+        <!--begin::Actions-->
+        <div class="d-flex align-items-center py-1">
+
+            <button class="btn btn-secondary me-3" type="button" >
+                Search Students
+            </button>
+            <button class="btn btn-primary" type="button" 
+                    (click)="addNewStudent()"
+                    data-bs-toggle="modal" data-bs-target="#student-form-modal">
+                Add new Student
+            </button>
+            
+
+        </div>
+        <!--end::Actions-->
+    </div>
+    <!--end::Container-->
+</div>
+
+<div class="card card-xxl-stretch">
+
+    <div class="card-header border-0 py-5"></div>
+
+    <div class="card-body d-flex flex-column">
+        <div class="table-responsive">
+            <table
+                class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Names
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Parent Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Parent Phone #
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="fw-bold text-gray-600">
+                    <tr *ngFor="let student of students">
+                        <th scope="row">
+                            {{ student.id }}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ student.firstName + ' ' + student.lastName }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ student.parentName }}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{ student.parentPhoneNumber }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="#" class="btn btn-sm btn-primary me-4" data-bs-toggle="modal"
+                                (click)="selectStudent(student.id)"
+                                data-bs-target="#student-form-modal">
+                                Edit
+                            </a>
+                            <a href="#" class="btn btn-sm btn-secondary me-4" data-bs-toggle="modal"
+                            (click)="selectStudent(student.id)"
+                            data-bs-target="#student-statement-modal"> 
+                                View Statement
+                            </a>
+                            <a href="#" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                            (click)="selectStudent(student.id)"
+                            data-bs-target="#payment-form-modal">
+                                Payment
+                            </a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="student-form-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Student</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <span class="svg-icon svg-icon-1"></span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+
+
+                <form class="space-y-6" #categoryForm="ngForm">
+                    <div class="mb-10 row">
+                        <div class="col-md-6">
+                            <label for="category_name" class="form-label">First name</label>
+                            <input type="text" [(ngModel)]="student.firstName" name="firstName" #name="ngModel"
+                                class="form-control" placeholder="First name" required minlength="4">          
+                        </div>
+                        <div class="col-md-6">
+                            <label for="category_name" class="form-label">Last name</label>
+                            <input type="text" [(ngModel)]="student.lastName" name="lastName" #name="ngModel"
+                                class="form-control" placeholder="Last Name" required minlength="4">          
+                        </div>           
+                    </div>
+                    <div class="mb-10 row">
+                        <div class="col-md-6">
+                            <label for="category_name" class="form-label">Date of Birth</label>
+                            <input type="text" [(ngModel)]="student.dateOfBirth" name="dateOfBirth" #name="ngModel"
+                                class="form-control" placeholder="Date of birth" required minlength="4">          
+                        </div>
+                        <div class="col-md-6">
+                            <label for="category_name" class="form-label">Class</label>
+                            <input type="hidden" [(ngModel)]="student.schoolClassId" name="schoolClassId" #name="ngModel">
+                            <input *ngIf="schoolClass" type="text" class="form-control" readonly value="{{ schoolClass.description }}">          
+                        </div>           
+                    </div>
+                    <div class="mb-10 row">
+                        <div class="col-md-6">
+                            <label for="category_name" class="form-label">Parent Name</label>
+                            <input type="text" [(ngModel)]="student.parentName" name="parentName" #name="ngModel"
+                                class="form-control" placeholder="Parent Name" required minlength="4">          
+                        </div>
+                        <div class="col-md-6">
+                            <label for="category_name" class="form-label">Parent Phone number</label>
+                            <input type="text" [(ngModel)]="student.parentPhoneNumber" name="parentPhoneNumber" #name="ngModel"
+                                class="form-control" placeholder="Phone number" required minlength="4">          
+                        </div>           
+                    </div>
+                    <div class="mb-10 row">
+                        <div class="col-md-12">
+                            <label for="category_name" class="form-label">Parent Address</label>
+                            <input type="text" [(ngModel)]="student.parentAddress" name="parentAddress" #name="ngModel"
+                                class="form-control" placeholder="Address" required minlength="4">          
+                        </div>
+                    </div>
+
+
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="close-school-form-modal" class="btn btn-light"
+                    data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="saveStudent()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="payment-form-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Record Payment</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <span class="svg-icon svg-icon-1"></span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+
+                <form class="space-y-6" #categoryForm="ngForm">
+                    <div class="mb-10 row">
+                        <div class="col-md-12">
+                            <label for="category_name" class="form-label">Amount</label>
+                            <input type="text" [(ngModel)]="payment.amount" name="unitPrice" #name="ngModel"
+                                class="form-control" placeholder="Price" required minlength="4">  
+                        </div>
+                                 
+                    </div>
+                    <div class="mb-10 row">
+                        <div class="col-md-12">
+                            <label for="category_name" class="form-label">Notes</label>
+                            <input type="text" class="form-control" placeholder="Description" required minlength="4">          
+                        </div>
+                                  
+                    </div>
+                    
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="close-payment-form-modal" class="btn btn-light"
+                    data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="savePayment()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="student-statement-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Account Statement</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <span class="svg-icon svg-icon-1"></span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+                <app-student-statement *ngIf="student.id" [studentId]="student.id"></app-student-statement>
+            </div>
+        </div>
+    </div>
+</div>
