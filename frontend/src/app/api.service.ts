@@ -6,6 +6,7 @@ import { GenericResponse } from './model/generic-response';
 import { Invoice } from './model/invoice';
 import { Payment } from './model/payment';
 import { SchoolClass } from './model/school-class';
+import { Statement } from './model/statement';
 import { Student } from './model/student';
 
 @Injectable({
@@ -30,6 +31,10 @@ export class ApiService {
 
   fetchSchoolClassBillableItems(schoolClassId:number):Observable<Billable[]>{
     return this.http.get<Billable[]>(this.apiEndPoint + '/school-class/' + schoolClassId + '/billable-items')
+  }
+
+  fetchStudentStatement(studentId:number): Observable<Statement>{
+    return this.http.get<Statement>(this.apiEndPoint + '/students/' + studentId + '/statement' )
   }
 
   saveSchoolClass(schoolClass: SchoolClass):Observable<SchoolClass>{

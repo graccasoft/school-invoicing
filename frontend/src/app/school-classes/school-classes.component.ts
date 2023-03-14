@@ -35,9 +35,12 @@ export class SchoolClassesComponent {
 
 
   selectSchoolClass(schoolClassId:number){
-    this.schoolClass = this.schoolClasses.filter((schoolClass)=>{
-      return schoolClass.id = schoolClassId
-    })[0]
+    for(let x=0; x< this.schoolClasses.length; x++){
+      if(schoolClassId == this.schoolClasses[x].id){
+        this.schoolClass = this.schoolClasses[x];
+      }
+    }
+    
   }
 
   saveSchoolClass(){

@@ -43,9 +43,12 @@ export class BillableItemsComponent {
   }
 
   selectItem(billableId:number){
-    this.billable = this.billableItems.filter((billable)=>{
-        return billable.id = billableId
-    })[0]
+    for(let x=0; x< this.billableItems.length; x++){
+      if(billableId == this.billableItems[x].id){
+        this.billable = this.billableItems[x];
+      }
+    }
+    
   }
 
   saveItem(){

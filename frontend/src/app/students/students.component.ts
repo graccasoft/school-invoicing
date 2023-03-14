@@ -47,9 +47,11 @@ export class StudentsComponent {
   }
 
   selectStudent(studentId:number){
-    this.student = this.students.filter((student)=>{
-      return student.id = studentId
-    })[0]
+    for(let x=0; x< this.students.length; x++){
+      if(studentId == this.students[x].id){
+        this.student = this.students[x];
+      }
+    }
   }
 
   saveStudent(){

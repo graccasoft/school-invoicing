@@ -92,7 +92,9 @@
                                 data-bs-target="#student-form-modal">
                                 Edit
                             </a>
-                            <a href="#" class="btn btn-sm btn-secondary me-4">
+                            <a href="#" class="btn btn-sm btn-secondary me-4" data-bs-toggle="modal"
+                            (click)="selectStudent(student.id)"
+                            data-bs-target="#student-statement-modal"> 
                                 View Statement
                             </a>
                             <a href="#" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
@@ -148,7 +150,7 @@
                         <div class="col-md-6">
                             <label for="category_name" class="form-label">Class</label>
                             <input type="hidden" [(ngModel)]="student.schoolClassId" name="schoolClassId" #name="ngModel">
-                            <input type="text" class="form-control" readonly value="{{ schoolClass.description }}">          
+                            <input *ngIf="schoolClass" type="text" class="form-control" readonly value="{{ schoolClass.description }}">          
                         </div>           
                     </div>
                     <div class="mb-10 row">
@@ -227,6 +229,27 @@
                 <button type="button" id="close-payment-form-modal" class="btn btn-light"
                     data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" (click)="savePayment()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="student-statement-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Account Statement</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <span class="svg-icon svg-icon-1"></span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+                <app-student-statement *ngIf="student.id" [studentId]="student.id"></app-student-statement>
             </div>
         </div>
     </div>
