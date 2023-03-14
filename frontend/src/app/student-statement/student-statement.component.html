@@ -1,0 +1,35 @@
+<div *ngIf="student">
+    <h4>Account Statement</h4>
+    <h5>{{ student.firstName + ' ' + student.lastName }}</h5>
+    <h5>{{ student.schoolClassName }}</h5>
+    <h5 *ngIf="statement">Account balance: {{ statement.balance }}</h5>
+</div>
+
+<div class="table-responsive mt-4" *ngIf="statement">
+    <!--begin::Table-->
+    <table class="table align-middle table-row-bordered table-row-solid gy-4 gs-9">
+        <!--begin::Thead-->
+        <thead class="border-gray-200 fs-5 fw-semibold bg-lighten">
+            <tr>
+                <th class=" ps-9">Date</th>
+                <th class="min-w-150px px-0">Transaction ID</th>
+                <th class="">Details</th>
+                <th class="min-w-125px">Amount</th>
+            </tr>
+        </thead>
+        <!--end::Thead-->
+
+        <!--begin::Tbody-->
+        <tbody class="fs-6 fw-semibold text-gray-600">
+            <tr *ngFor="let item of statement.items">
+                <td class="ps-9">{{ item.date }}</td>
+                <td class="ps-0">102445788</td>
+                <td>{{ item.description }}</td>
+                <td *ngIf="item.transactionType == 'PAYMENT'" class="text-success">${{item.amount}}</td>
+                <td *ngIf="item.transactionType == 'INVOICE'" class="text-danger">${{item.amount}}</td>
+            </tr>   
+        </tbody>
+        <!--end::Tbody-->                                       
+    </table>
+    <!--end::Table-->
+</div>

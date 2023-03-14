@@ -14,7 +14,9 @@ import { Student } from './model/student';
 })
 export class ApiService {
 
-  apiEndPoint:string = "http://localhost:8081"
+  //apiEndPoint:string = "http://localhost:8081"
+  apiEndPoint:string = "https://backend.payments.graccasoft.com"
+
   constructor(private http: HttpClient) { }
 
   fetchSchoolClasses():Observable<SchoolClass[]>{
