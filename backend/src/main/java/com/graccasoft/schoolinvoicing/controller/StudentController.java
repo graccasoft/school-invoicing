@@ -8,6 +8,7 @@ import com.graccasoft.schoolinvoicing.service.InvoiceDocumentService;
 import com.graccasoft.schoolinvoicing.service.InvoiceService;
 import com.graccasoft.schoolinvoicing.service.PaymentService;
 import com.graccasoft.schoolinvoicing.service.StudentService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,9 +39,10 @@ public class StudentController {
         return new ResponseEntity<>(savedStudent, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public List<StudentDto> getStudents(@PathVariable Long schoolClassId){
-        return studentService.findStudentsInClass(schoolClassId);
+    @GetMapping()
+    public List<StudentDto> getStudents( @RequestParam(name = "lastName", required = false) String lastName){
+        lastName = lastName == null ? "" : lastName;
+        return studentService.findStudentsByName(lastName);
     }
 
     @GetMapping("/{id}")

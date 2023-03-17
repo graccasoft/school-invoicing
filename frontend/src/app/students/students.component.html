@@ -28,10 +28,10 @@
         <!--begin::Actions-->
         <div class="d-flex align-items-center py-1">
 
-            <button class="btn btn-secondary me-3" type="button" >
-                Search Students
-            </button>
-            <button class="btn btn-primary" type="button" 
+            <input type="text" class="form-control me-3" [(ngModel)] = "searchLastName" (keyup)="searchStudents()"
+                    placeholder="Search by last name">
+            
+            <button class="btn btn-primary" type="button"  *ngIf="schoolClass"
                     (click)="addNewStudent()"
                     data-bs-toggle="modal" data-bs-target="#student-form-modal">
                 Add new Student

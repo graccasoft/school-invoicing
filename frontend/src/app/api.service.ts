@@ -51,6 +51,10 @@ export class ApiService {
     return this.http.get<Student>(this.apiEndPoint + '/students/' + studentId )
   }
 
+  searchStudents(lastName: string):Observable<Student[]>{
+    return this.http.get<Student[]>(this.apiEndPoint + '/students?lastName=' + lastName )
+  }
+
   saveStudent(student:Student):Observable<Student>{
     return this.http.post<Student>(this.apiEndPoint + "/students", student)
   }

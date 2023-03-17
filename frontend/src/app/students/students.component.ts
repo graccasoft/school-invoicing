@@ -18,6 +18,8 @@ export class StudentsComponent {
   student: Student = new Student()
   payment: Payment = new Payment()
 
+  searchLastName: string = ""
+
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
@@ -28,15 +30,26 @@ export class StudentsComponent {
     const routeParams = this.route.snapshot.paramMap;
     var schoolClassId =  Number( routeParams.get("classId") );
     
-    this.fetchStudents(schoolClassId)
-    this.apiService.fetchSchoolClass(schoolClassId).subscribe(schoolClass=>{
-      this.schoolClass = schoolClass
-    })
+    if( schoolClassId ){
+      this.fetchStudents(schoolClassId)
+      this.apiService.fetchSchoolClass(schoolClassId).subscribe(schoolClass=>{
+        this.schoolClass = schoolClass
+      })
+    }else{
+      this.searchStudents()
+    }
+    
 
   }
 
   fetchStudents(schoolClassId:number){
     this.apiService.fetchStudentsInClass(schoolClassId).subscribe(students=>{
+      this.students = students
+    })
+  }
+
+  searchStudents(){
+    this.apiService.searchStudents(this.searchLastName).subscribe(students=>{
       this.students = students
     })
   }
