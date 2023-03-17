@@ -46,6 +46,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .toList();
     }
 
+
     @Override
     public List<InvoiceDto> getStudentInvoices(Long studentId) {
         return invoiceRepository.findByStudent(studentId)
@@ -61,7 +62,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public void generateInvoiceForSchoolClass(Long schoolClassId) {
+    public void generateInvoiceForSchoolClass(Long schoolClassId, String invoiceTitle) {
         //get billableItems
         List<Billable> billableItems = billableRepository.getAllBySchoolClassId(schoolClassId);
         if( billableItems.size() == 0 ){
@@ -72,11 +73,11 @@ public class InvoiceServiceImpl implements InvoiceService {
         //todo what if there are more than 1000 students
         List<Student> students = studentRepository.findAllBySchoolClass(billableItems.get(0).getSchoolClass(), PageRequest.of(0,1000));
 
-        persistInvoices(students, billableItems);
+        persistInvoices(students, billableItems, invoiceTitle);
     }
 
     @Override
-    public void generateInvoiceForStudent(Long studentId) {
+    public void generateInvoiceForStudent(Long studentId, String invoiceTitle) {
         Student student = studentRepository.findById(studentId).orElseThrow(()->new EntityNotFoundException("Student not found"));
         //get billableItems
         List<Billable> billableItems = billableRepository.getAllBySchoolClassId(student.getSchoolClass().getId());
@@ -84,15 +85,21 @@ public class InvoiceServiceImpl implements InvoiceService {
             return; //might want to throw an exception
         }
         Student[] students = new Student[]{student};
-        persistInvoices(Arrays.asList(students), billableItems);
+        persistInvoices(Arrays.asList(students), billableItems, invoiceTitle);
+    }
+
+    @Override
+    public Invoice getLatestStudentInvoice(Long studentId) {
+        return invoiceRepository.findFirstByStudentIdOrderByIdDesc(studentId).orElseThrow(() -> new EntityNotFoundException("No invoices for student")) ;
     }
 
     @Transactional
     //todo run as async, this might take time
-    private void persistInvoices(List<Student> students,List<Billable> billableItems){
+    private void persistInvoices(List<Student> students,List<Billable> billableItems, String invoiceTitle){
         //create invoice for each student
         students.forEach( (student)->{
             Invoice invoice = new Invoice();
+            invoice.setTitle(invoiceTitle);
             invoice.setStudent(student);
 
             BigDecimal invoiceTotal = BigDecimal.ZERO;

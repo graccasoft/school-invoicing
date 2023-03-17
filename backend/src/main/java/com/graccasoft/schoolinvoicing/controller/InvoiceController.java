@@ -2,10 +2,8 @@ package com.graccasoft.schoolinvoicing.controller;
 
 import com.graccasoft.schoolinvoicing.dto.GenericResponse;
 import com.graccasoft.schoolinvoicing.service.InvoiceService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("invoice")
@@ -19,17 +17,20 @@ public class InvoiceController {
 
     @PostMapping("student")
     public GenericResponse generateStudentInvoice(@RequestBody GenerateStudentInvoiceRequest generateStudentInvoiceRequest){
-        invoiceService.generateInvoiceForStudent(generateStudentInvoiceRequest.studentId);
+        invoiceService.generateInvoiceForStudent(generateStudentInvoiceRequest.studentId(),
+                generateStudentInvoiceRequest.title());
         return new GenericResponse(true, "Invoices successfully generated");
     }
 
     @PostMapping("school")
     public GenericResponse generateSchoolClassInvoice(@RequestBody GenerateSchoolClassInvoiceRequest generateSchoolClassInvoiceRequest){
-        invoiceService.generateInvoiceForSchoolClass(generateSchoolClassInvoiceRequest.schoolClassId());
+        invoiceService.generateInvoiceForSchoolClass(generateSchoolClassInvoiceRequest.schoolClassId(),
+                generateSchoolClassInvoiceRequest.title());
         return new GenericResponse(true, "Invoices successfully generated");
     }
 
-    record GenerateStudentInvoiceRequest(Long studentId){}
-    record GenerateSchoolClassInvoiceRequest(Long schoolClassId){}
+
 
 }
+record GenerateStudentInvoiceRequest(Long studentId, String title){}
+record GenerateSchoolClassInvoiceRequest(Long schoolClassId, String title){}

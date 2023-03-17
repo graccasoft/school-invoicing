@@ -13,6 +13,7 @@ import java.util.List;
 @Builder
 public class InvoiceDto {
     private Long id;
+    private String title;
     private Date createdAt;
     private Long studentId;
     private String studentName;

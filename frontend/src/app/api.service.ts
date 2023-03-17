@@ -14,8 +14,8 @@ import { Student } from './model/student';
 })
 export class ApiService {
 
-  //apiEndPoint:string = "http://localhost:8081"
-  apiEndPoint:string = "https://backend.payments.graccasoft.com"
+  apiEndPoint:string = "http://localhost:8081"
+  //apiEndPoint:string = "https://backend.payments.graccasoft.com"
 
   constructor(private http: HttpClient) { }
 
@@ -71,12 +71,14 @@ export class ApiService {
     return this.http.post<Payment>(this.apiEndPoint + '/payments', payment)
   }
 
-  generateSchoolClassInvoices(schoolClassId:number): Observable<GenericResponse>{
-    return this.http.post<GenericResponse>(this.apiEndPoint + '/invoice/school', {'schoolClassId':schoolClassId})
+  generateSchoolClassInvoices(schoolClassId:number,invoicesTitle:string): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(this.apiEndPoint + '/invoice/school', 
+      {'schoolClassId':schoolClassId,'title':invoicesTitle})
   }
 
-  generateStudentInvoices(studentId:number): Observable<GenericResponse>{
-    return this.http.post<GenericResponse>(this.apiEndPoint + '/invoice/student', {'studentId':studentId})
+  generateStudentInvoices(studentId:number,invoicesTitle:string): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(this.apiEndPoint + '/invoice/student', 
+      {'studentId':studentId,'title':invoicesTitle})
   }
 
 

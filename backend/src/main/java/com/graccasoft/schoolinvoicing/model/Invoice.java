@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Invoice extends BaseEntity  {
+    private String title;
     private BigDecimal totalAmount;
 
     @ManyToOne
