@@ -85,7 +85,6 @@ export class StudentsComponent {
 
         document.getElementById("close-payment-form-modal")?.click();
         this.toastr.success('Payment has been successfully saved','Invoicing System');
-        this.addNewStudent()
     })
   }
 

@@ -1,3 +1,4 @@
+import { formatCurrency, formatDate } from '@angular/common';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Statement } from '../model/statement';
@@ -18,6 +19,10 @@ export class StudentStatementComponent {
 
   fetchStatementInfo(){
     this.apiService.fetchStudentStatement(this.studentId).subscribe(statement=>{
+      statement.items.forEach((item, index)=>{
+        statement.items[index].date = formatDate(item.date,"dd MMM yyyy","en_ZW")
+        statement.items[index].formattedAmount = formatCurrency(item.amount,"en_ZW","$")
+      })
       this.statement = statement
     })
     this.apiService.fetchStudent(this.studentId).subscribe(student=>{

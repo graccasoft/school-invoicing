@@ -67,8 +67,8 @@ export class ApiService {
     return this.http.get<Payment[]>(this.apiEndPoint + '/students/' + studentId + '/payments')
   }
 
-  fetchAllPayments(studentId: number):Observable<Payment[]>{
-    return this.http.get<Payment[]>(this.apiEndPoint + '/payments/')
+  fetchAllPayments():Observable<Payment[]>{
+    return this.http.get<Payment[]>(this.apiEndPoint + '/payments')
   }
 
   savePayment(payment:Payment): Observable<Payment>{

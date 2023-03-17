@@ -25,8 +25,8 @@
                 <td class="ps-9">{{ item.date }}</td>
                 <td class="ps-0">102445788</td>
                 <td>{{ item.description }}</td>
-                <td *ngIf="item.transactionType == 'PAYMENT'" class="text-success">${{item.amount}}</td>
-                <td *ngIf="item.transactionType == 'INVOICE'" class="text-danger">${{item.amount}}</td>
+                <td *ngIf="item.transactionType == 'PAYMENT'" class="text-success">{{item.formattedAmount}}</td>
+                <td *ngIf="item.transactionType == 'INVOICE'" class="text-danger">{{item.formattedAmount}}</td>
             </tr>   
         </tbody>
         <!--end::Tbody-->                                       

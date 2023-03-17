@@ -9,6 +9,7 @@ import com.graccasoft.schoolinvoicing.repository.StudentRepository;
 import com.graccasoft.schoolinvoicing.service.PaymentService;
 import com.graccasoft.schoolinvoicing.service.SmsService;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,7 +55,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public List<PaymentDto> getAllPayments() {
-        return paymentRepository.findAll()
+        return paymentRepository.findAll(Sort.by(Sort.Direction.DESC,"id"))
                 .stream()
                 .map(paymentDtoMapper)
                 .toList();

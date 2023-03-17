@@ -14,5 +14,6 @@ public class PaymentDto {
     private Long id;
     private BigDecimal amount;
     private Long studentId;
+    private String studentName;
     private Date createdAt;
 }

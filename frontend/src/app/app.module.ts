@@ -10,7 +10,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentsComponent } from './students/students.component';
 import { BillableItemsComponent } from './billable-items/billable-items.component';
-import { StudentStatementComponent } from './student-statement/student-statement.component'
+import { StudentStatementComponent } from './student-statement/student-statement.component';
+import { PaymentsComponent } from './payments/payments.component'
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { StudentStatementComponent } from './student-statement/student-statement
     SchoolClassesComponent,
     StudentsComponent,
     BillableItemsComponent,
-    StudentStatementComponent
+    StudentStatementComponent,
+    PaymentsComponent
   ],
   imports: [
     BrowserModule,
