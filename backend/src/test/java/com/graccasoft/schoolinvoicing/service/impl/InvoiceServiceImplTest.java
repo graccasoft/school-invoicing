@@ -81,7 +81,7 @@ class InvoiceServiceImplTest {
     @Order(1)
     void shouldGenerateInvoicesForAllStudents(){
         //generate invoices
-        invoiceService.generateInvoiceForSchoolClass(schoolClass.getId(), generateSchoolClassInvoiceRequest.title());
+        invoiceService.generateInvoiceForSchoolClass(schoolClass.getId(), "Test invoice");
 
         List<InvoiceDto> invoices = invoiceService.getSchoolClassInvoices(schoolClass.getId());
 
@@ -104,7 +104,7 @@ class InvoiceServiceImplTest {
         StudentDto savedStudent = studentService.saveStudent(studentDto);
 
         //generate invoices
-        invoiceService.generateInvoiceForStudent(savedStudent.getId(), generateStudentInvoiceRequest.title());
+        invoiceService.generateInvoiceForStudent(savedStudent.getId(), "Test invoice");
 
         List<InvoiceDto> invoices = invoiceService.getStudentInvoices(savedStudent.getId());
         Assertions.assertEquals(1, invoices.size());
@@ -127,7 +127,7 @@ class InvoiceServiceImplTest {
         StudentDto savedStudent = studentService.saveStudent(studentDto);
 
         //generate invoices
-        invoiceService.generateInvoiceForStudent(savedStudent.getId(), generateStudentInvoiceRequest.title());
+        invoiceService.generateInvoiceForStudent(savedStudent.getId(), "Test invoice");
 
         List<InvoiceDto> invoices = invoiceService.getStudentInvoices(savedStudent.getId());
         Assertions.assertEquals(invoices.get(0).getItems().size(), 2);
