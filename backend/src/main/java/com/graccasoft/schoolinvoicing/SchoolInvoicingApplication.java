@@ -13,6 +13,7 @@ public class SchoolInvoicingApplication {
 		SpringApplication.run(SchoolInvoicingApplication.class, args);
 	}
 
+	//create default user
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
