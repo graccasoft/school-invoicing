@@ -22,7 +22,7 @@ public class InvoiceDtoMapper implements Function<Invoice, InvoiceDto> {
                 .totalAmount(invoice.getTotalAmount())
                 .createdAt(invoice.getCreatedAt())
                 .id(invoice.getId())
-
+                .title(invoice.getTitle())
                 .build();
     }
 }

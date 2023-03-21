@@ -3,4 +3,5 @@ export class StatementItem{
     description!: string
     date!: string
     amount!: number
+    formattedAmount!: string
 }

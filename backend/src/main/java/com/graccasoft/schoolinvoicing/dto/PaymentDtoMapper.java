@@ -14,6 +14,7 @@ public class PaymentDtoMapper implements Function<Payment, PaymentDto> {
                 .amount(payment.getAmount())
                 .createdAt(payment.getCreatedAt())
                 .studentId(payment.getStudent().getId())
+                .studentName(payment.getStudent().toString())
                 .build();
 
     }

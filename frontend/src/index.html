@@ -20,6 +20,14 @@
 
   <script src="./assets/plugins/global/plugins.bundle.js"></script>
   <script src="./assets/js/scripts.bundle.js"></script>
+  <script>
+    $(document).ready(function(){
+      $(".aside-menu .menu-link").click(function(){
+        $(".aside-menu .menu-link").removeClass("active");
+        $(this).addClass("active");
+      })
+    })
+  </script>
 </body>
 </html>
 

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from './../environments/environment';
 import { Billable } from './model/billable';
 import { GenericResponse } from './model/generic-response';
 import { Invoice } from './model/invoice';
@@ -14,8 +15,7 @@ import { Student } from './model/student';
 })
 export class ApiService {
 
-  //apiEndPoint:string = "http://localhost:8081"
-  apiEndPoint:string = "https://backend.payments.graccasoft.com"
+  apiEndPoint:string = environment.apiEndPoint
 
   constructor(private http: HttpClient) { }
 
@@ -51,6 +51,10 @@ export class ApiService {
     return this.http.get<Student>(this.apiEndPoint + '/students/' + studentId )
   }
 
+  searchStudents(lastName: string):Observable<Student[]>{
+    return this.http.get<Student[]>(this.apiEndPoint + '/students?lastName=' + lastName )
+  }
+
   saveStudent(student:Student):Observable<Student>{
     return this.http.post<Student>(this.apiEndPoint + "/students", student)
   }
@@ -63,20 +67,22 @@ export class ApiService {
     return this.http.get<Payment[]>(this.apiEndPoint + '/students/' + studentId + '/payments')
   }
 
-  fetchAllPayments(studentId: number):Observable<Payment[]>{
-    return this.http.get<Payment[]>(this.apiEndPoint + '/payments/')
+  fetchAllPayments():Observable<Payment[]>{
+    return this.http.get<Payment[]>(this.apiEndPoint + '/payments')
   }
 
   savePayment(payment:Payment): Observable<Payment>{
     return this.http.post<Payment>(this.apiEndPoint + '/payments', payment)
   }
 
-  generateSchoolClassInvoices(schoolClassId:number): Observable<GenericResponse>{
-    return this.http.post<GenericResponse>(this.apiEndPoint + '/invoice/school', {'schoolClassId':schoolClassId})
+  generateSchoolClassInvoices(schoolClassId:number,invoicesTitle:string): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(this.apiEndPoint + '/invoice/school', 
+      {'schoolClassId':schoolClassId,'title':invoicesTitle})
   }
 
-  generateStudentInvoices(studentId:number): Observable<GenericResponse>{
-    return this.http.post<GenericResponse>(this.apiEndPoint + '/invoice/student', {'studentId':studentId})
+  generateStudentInvoices(studentId:number,invoicesTitle:string): Observable<GenericResponse>{
+    return this.http.post<GenericResponse>(this.apiEndPoint + '/invoice/student', 
+      {'studentId':studentId,'title':invoicesTitle})
   }
 
 

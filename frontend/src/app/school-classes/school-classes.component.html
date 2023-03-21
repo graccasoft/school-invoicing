@@ -69,7 +69,9 @@
                             <a [routerLink]="['/billable-items',schoolClass.id]" class="btn btn-sm btn-secondary me-4">
                                 Invoice Items
                             </a>
-                            <a href="#" class="btn btn-sm btn-secondary" (click)="runInvoices(schoolClass.id); false">
+                            <a href="#" class="btn btn-sm btn-secondary" data-bs-toggle="modal" 
+                                    (click)="selectSchoolClass(schoolClass.id)"
+                                    data-bs-target="#invoices-form-modal">
                                 Run Invoices
                             </a>
                         </td>
@@ -126,6 +128,50 @@
                 <button type="button" id="close-school-form-modal" class="btn btn-light"
                     data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" (click)="saveSchoolClass()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="invoices-form-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Run Invoices for {{schoolClass.description}}</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <span class="svg-icon svg-icon-1"></span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+
+                <div class="mb-10">
+                    <label for="category_name" class="form-label">Invoice Title</label>
+                    <input type="text" [(ngModel)]="invoiceTitle" name="description" #name="ngModel"
+                        class="form-control" placeholder="e.g. First term fees" required minlength="4"
+                        (change)="toggleFormValidation(true)">
+                    <div *ngIf="!formIsValid" class="text-danger">
+
+                        <div *ngIf="name.errors?.['required']">
+                            Title is required.
+                        </div>
+                        <div *ngIf="name.errors?.['minlength']">
+                            Title.
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="close-invoices-form-modal" class="btn btn-light"
+                    data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="runInvoices(schoolClass.id)">Save changes</button>
             </div>
         </div>
     </div>

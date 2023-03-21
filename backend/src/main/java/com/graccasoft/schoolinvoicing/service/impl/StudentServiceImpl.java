@@ -63,7 +63,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDto> findStudentsInClass(Long schoolClassId) {
-        SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId)
+       SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId)
                 .orElseThrow(()-> new BadRequestException("Invalid school class"));
         //todo provide pages
         return  studentRepository.findAllBySchoolClass(schoolClass, PageRequest.of(0,20))
