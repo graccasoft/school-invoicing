@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from './../environments/environment';
 import { Billable } from './model/billable';
 import { GenericResponse } from './model/generic-response';
 import { Invoice } from './model/invoice';
@@ -14,8 +15,7 @@ import { Student } from './model/student';
 })
 export class ApiService {
 
-  apiEndPoint:string = "http://localhost:8081"
-  //apiEndPoint:string = "https://backend.payments.graccasoft.com"
+  apiEndPoint:string = environment.apiEndPoint
 
   constructor(private http: HttpClient) { }
 
