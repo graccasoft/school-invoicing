@@ -8,7 +8,6 @@ import com.graccasoft.schoolinvoicing.service.InvoiceDocumentService;
 import com.graccasoft.schoolinvoicing.service.InvoiceService;
 import com.graccasoft.schoolinvoicing.service.PaymentService;
 import com.graccasoft.schoolinvoicing.service.StudentService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
