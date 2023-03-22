@@ -27,17 +27,17 @@ To get started with this project, you will need to have the following installed 
 To build and run the project, follow these steps:
 
 * Clone the repository: `https://github.com/graccasoft/school-invoicing.git`
-* Navigate to the project directory: cd school-invoicing/backend
+* Navigate to the project directory: `cd school-invoicing/backend`
 * Build the project: `mvn clean install`
 * Run the project: `mvn spring-boot:run`
 * Run tests:  `mvn -Dtest=DispatchServiceImplTest test`
-* Navigate to the project directory: cd school-invoicing/frontend
+* Navigate to the project directory: `cd school-invoicing/frontend`
 * Install frontend node packages: `npm install`
 * Start the angular application for the frontend: `ng serve`
 
--> The application will be available at http://localhost:8081.
+-> The backend application will be available at http://localhost:8081
+-> The frontend application will be available at http://localhost:4200
 
--> For R
 
 # ER Diagram
 ![alt text](https://github.com/graccasoft/school-invoicing/blob/main/ER.drawio.png?raw=true)
