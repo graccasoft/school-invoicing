@@ -2,8 +2,10 @@ package com.graccasoft.schoolinvoicing.controller;
 
 import com.graccasoft.schoolinvoicing.dto.GenericResponse;
 import com.graccasoft.schoolinvoicing.service.InvoiceService;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("invoices")

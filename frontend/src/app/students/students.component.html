@@ -46,9 +46,6 @@
                 <thead>
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            ID
-                        </th>
-                        <th scope="col" class="px-6 py-3">
                             Names
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -64,9 +61,7 @@
                 </thead>
                 <tbody class="fw-bold text-gray-600">
                     <tr *ngFor="let student of students">
-                        <th scope="row">
-                            {{ student.id }}
-                        </th>
+                        
                         <td class="px-6 py-4">
                             {{ student.firstName + ' ' + student.lastName }}
                         </td>
@@ -86,12 +81,15 @@
                             <a href="#" class="btn btn-sm btn-secondary me-4" data-bs-toggle="modal"
                             (click)="selectStudent(student.id)"
                             data-bs-target="#student-statement-modal"> 
-                                View Statement
+                                Statement
                             </a>
-                            <a href="#" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                            <a href="#" class="btn btn-sm btn-secondary me-4" data-bs-toggle="modal"
                             (click)="selectStudent(student.id)"
                             data-bs-target="#payment-form-modal">
                                 Payment
+                            </a>
+                            <a href="{{ getInvoiceDownloadLink(student.id)  }}" class="btn btn-sm btn-secondary" target="_blank">
+                                Invoice
                             </a>
                         </td>
                     </tr>
