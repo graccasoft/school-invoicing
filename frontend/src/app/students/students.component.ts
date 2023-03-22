@@ -42,6 +42,9 @@ export class StudentsComponent {
 
   }
 
+  getInvoiceDownloadLink(studentId:number){
+    return this.apiService.apiEndPoint + '/students/' + studentId + '/invoice'
+  }
   fetchStudents(schoolClassId:number){
     this.apiService.fetchStudentsInClass(schoolClassId).subscribe(students=>{
       this.students = students

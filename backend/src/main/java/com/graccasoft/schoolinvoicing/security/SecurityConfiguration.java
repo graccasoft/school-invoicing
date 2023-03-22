@@ -45,6 +45,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((requests)-> requests
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/students/{studentId}/invoice").permitAll()
                         .requestMatchers("/**").hasAnyAuthority("SCOPE_ADMINISTRATOR")
                 )
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
