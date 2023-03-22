@@ -1,4 +1,4 @@
-# school-invoicing
+# School Invoicing and Payments
 This is an application for generating invoices and receiving payments for a school or any other institution.
 ## Features
 * Enroll/Register Student
