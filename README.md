@@ -39,5 +39,5 @@ To build and run the project, follow these steps:
 
 -> For R
 
-# Class Diagram
+# ER Diagram
 ![alt text](https://github.com/graccasoft/school-invoicing/blob/main/ER.drawio.png?raw=true)
