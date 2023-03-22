@@ -11,7 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentsComponent } from './students/students.component';
 import { BillableItemsComponent } from './billable-items/billable-items.component';
 import { StudentStatementComponent } from './student-statement/student-statement.component';
-import { PaymentsComponent } from './payments/payments.component'
+import { PaymentsComponent } from './payments/payments.component';
+import { LoginComponent } from './login/login.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PaymentsComponent } from './payments/payments.component'
     StudentsComponent,
     BillableItemsComponent,
     StudentStatementComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
