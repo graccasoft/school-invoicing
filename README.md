@@ -1,4 +1,17 @@
 # school-invoicing
+This is an application for generating invoices and receiving payments for a school or any other institution.
+## Features
+* Enroll/Register Student
+* Create/Manage Classes
+* Manage Invoice Items
+* Generate Invoices for Students in a Class
+* Generate invoice for an individual Student
+* Print Invoice as PDF
+* Record Payments for a Student
+* Send SMS notification for received Payments
+* Generate Account Statement for a Student
+* Different access levels
+
 ## Technologies
 * Spring Boot 3.0
 * Maven
